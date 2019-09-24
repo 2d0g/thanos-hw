@@ -16,6 +16,7 @@ import (
 	"github.com/thanos-io/thanos/pkg/objstore/client"
 	"github.com/thanos-io/thanos/pkg/objstore/cos"
 	"github.com/thanos-io/thanos/pkg/objstore/gcs"
+	"github.com/thanos-io/thanos/pkg/objstore/obs"
 	"github.com/thanos-io/thanos/pkg/objstore/s3"
 	"github.com/thanos-io/thanos/pkg/objstore/swift"
 	trclient "github.com/thanos-io/thanos/pkg/tracing/client"
@@ -33,6 +34,7 @@ var (
 		client.S3:    s3.Config{},
 		client.SWIFT: swift.SwiftConfig{},
 		client.COS:   cos.Config{},
+		client.OBS:   obs.Config{},
 	}
 	tracingConfigs = map[trclient.TracingProvider]interface{}{
 		trclient.JAEGER:      jaeger.Config{},

@@ -2,6 +2,7 @@ module github.com/thanos-io/thanos
 
 require (
 	cloud.google.com/go v0.44.1
+	github.com/2d0g/obs v0.0.0-20190923143402-54113c03bb77
 	github.com/Azure/azure-storage-blob-go v0.7.0
 	github.com/NYTimes/gziphandler v1.1.1
 	github.com/armon/go-metrics v0.0.0-20190430140413-ec5e00d3c878
