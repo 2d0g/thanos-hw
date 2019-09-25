@@ -205,7 +205,13 @@ func (b *Bucket) Delete(ctx context.Context, name string) error {
 	input := &obs.DeleteObjectInput{}
 	input.Bucket = b.name
 	input.Key = name
-	_, err := b.client.DeleteObject(input)
+	ok, _ := b.Exists(ctx, name)
+	if !ok {
+		return errors.Wrap(errors.New("delete obs object"), "delete obs object")
+	}
+	output, err := b.client.DeleteObject(input)
+	fmt.Printf("output======\n")
+	fmt.Printf("%v", output)
 	if err != nil {
 		return errors.Wrap(err, "delete obs object")
 	}
@@ -324,7 +330,9 @@ func (b *Bucket) Exists(ctx context.Context, name string) (bool, error) {
 
 // IsObjNotFoundErr returns true if error means that object is not found. Relevant to Get operations.
 func (b *Bucket) IsObjNotFoundErr(err error) bool {
-	return strings.Contains(err.Error(), "StatusCode=404")
+	fmt.Printf("=========")
+	fmt.Printf("%v\n", err.Error())
+	return strings.Contains(err.Error(), "404")
 }
 
 func (b *Bucket) Close() error { return nil }

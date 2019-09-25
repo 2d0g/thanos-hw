@@ -11,7 +11,7 @@ import (
 	"github.com/thanos-io/thanos/pkg/objstore/cos"
 	"github.com/thanos-io/thanos/pkg/objstore/gcs"
 	"github.com/thanos-io/thanos/pkg/objstore/inmem"
-	cos "github.com/thanos-io/thanos/pkg/objstore/obs"
+	obs "github.com/thanos-io/thanos/pkg/objstore/obs"
 	"github.com/thanos-io/thanos/pkg/objstore/s3"
 	"github.com/thanos-io/thanos/pkg/objstore/swift"
 	"github.com/thanos-io/thanos/pkg/testutil"
@@ -120,7 +120,7 @@ func ForeachStore(t *testing.T, testFn func(t testing.TB, bkt objstore.Bucket)) 
 	}
 	// Optional OBS.
 	if _, ok := os.LookupEnv("THANOS_SKIP_OBS_TESTS"); !ok {
-		bkt, closeFn, err := oss.NewTestBucket(t)
+		bkt, closeFn, err := obs.NewTestBucket(t)
 		testutil.Ok(t, err)
 
 		ok := t.Run("obs", func(t *testing.T) {
