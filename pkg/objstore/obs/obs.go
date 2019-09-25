@@ -3,8 +3,8 @@ package obs
 import (
 	"bufio"
 	"context"
-	"fmt"
 	"io"
+        "fmt"
 	"math/rand"
 	"os"
 	"strings"
@@ -209,9 +209,7 @@ func (b *Bucket) Delete(ctx context.Context, name string) error {
 	if !ok {
 		return errors.Wrap(errors.New("delete obs object"), "delete obs object")
 	}
-	output, err := b.client.DeleteObject(input)
-	fmt.Printf("output======\n")
-	fmt.Printf("%v", output)
+	_, err := b.client.DeleteObject(input)
 	if err != nil {
 		return errors.Wrap(err, "delete obs object")
 	}
@@ -248,7 +246,6 @@ func (b *Bucket) listObjects(dir string) ([]string, error) {
 			break
 		}
 	}
-	fmt.Printf("%v\n", listNames)
 	return listNames, nil
 }
 
@@ -330,8 +327,6 @@ func (b *Bucket) Exists(ctx context.Context, name string) (bool, error) {
 
 // IsObjNotFoundErr returns true if error means that object is not found. Relevant to Get operations.
 func (b *Bucket) IsObjNotFoundErr(err error) bool {
-	fmt.Printf("=========")
-	fmt.Printf("%v\n", err.Error())
 	return strings.Contains(err.Error(), "404")
 }
 
