@@ -219,7 +219,7 @@ func (b *Bucket) Delete(ctx context.Context, name string) error {
 func (b *Bucket) listObjects(dir string) ([]string, error) {
 	input := &obs.ListObjectsInput{}
 	input.Bucket = b.name
-	input.MaxKeys = 1
+	input.MaxKeys = 1000
 	input.Prefix = dir
 	input.Delimiter = "/"
 	//  input.Prefix = "src/"
